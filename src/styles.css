@@ -725,10 +725,6 @@ h1 {
   padding: 30px 0 34px;
 }
 
-.doc-section:first-child {
-  padding-top: 0;
-}
-
 .doc-section + .doc-section {
   border-top: 1px solid var(--line);
 }
