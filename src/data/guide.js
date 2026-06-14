@@ -3,74 +3,83 @@ export const guidePages = [
     path: '/',
     name: '首页',
     icon: 'Home',
-    eyebrow: '2026 新生指南',
-    title: '中原工学院新生生存指北',
-    description: '把新生最容易反复询问的问题，整理成一份可以快速定位的入学指南。',
+    eyebrow: '非官方并不唯一指定新生手册',
+    title: '中原工学院生存指北',
+    description: 'Copyright © 计算机学院 计科222 黄徵琪',
     home: true,
-    stages: [
-      {
-        title: '入学前须知',
-        description: '先确认录取、校区、路线和需要提前准备的材料。',
-        items: [
-          { title: '报到与校区', text: '校区分布、预报到、学生票、到校路线、证件清单。', to: '/arrival' },
-          { title: '医保与政策', text: '大学生医保、转专业政策、奖助制度等提前了解。', to: { path: '/affairs', hash: '#medical' } },
-        ],
-      },
-      {
-        title: '入学时明白',
-        description: '到校后最先会遇到住宿、通勤、快递和校园服务。',
-        items: [
-          { title: '住宿与生活', text: '宿舍分配、门禁熄灯、校内通勤、快递驿站。', to: '/life' },
-          { title: '服务与其他', text: '校园网、消费方式、银行卡和活动相关信息。', to: '/services' },
-        ],
-      },
-      {
-        title: '入学后了解',
-        description: '课程开始后，再逐步了解学习安排、训练和后续发展。',
-        items: [
-          { title: '学习与训练', text: '教材、小语种、开学考、早晚自习、军训。', to: '/study' },
-          { title: '奖助与转专业', text: '奖学金、专项奖学金、转专业办理时间和要求。', to: { path: '/affairs', hash: '#scholarship' } },
-        ],
-      },
-    ],
     sections: [
       {
         id: 'preface',
         title: '写在最前',
-        summary: '这是一份面向中原工学院新生的非官方入学指南，用来快速定位常见问题。',
+        summary: '',
         html: `
-          <p>这份指南主要整理新生入学前后最容易反复询问的问题，方便大家按阶段快速查找。</p>
+          <p>这份指南主要整理新生入学前后常见问题，方便大家按阶段快速查找。<strong>本文档仅供解答新生疑问，禁止用于从事营销、引流、倒卖资料等活动。</strong></p>
+          <p>文档由个人维护，均来自本人大学四年+一年班助+两年半班长+两届医保咨询的经验，可能存在遗漏或过期内容。<strong>涉及报到、缴费、政策、学院安排等事项，请以学校和学院官方通知为准。</strong></p>
+          <p>欢迎各位新生加入<strong>中原工学院唯一无广纯为爱发电新生群</strong>。中原工学院吧2026年新生群：<button class="copy-chip copy-chip-inline" type="button" data-copy="781245651" data-copy-label="新生群群号">781245651</button></p>
+          <p class="notice danger">请各位同学警惕抖音、小红书等社交媒体自称学长学姐的非官方人员主动联系你邀请加入个人组织建立的新生群。涉及床上用品、校园电话卡等与金钱有关的交易，请务必慎重。<br>如果你不是从上面这个群而是<strong>别的新生群看到这个网页</strong>，那么那个群多半是广告群，群主和管理员可能会借新生群卖卡、卖被子或做其他营销。</p>
+          <p>如果你也想一起维护文档，或者有其他问题咨询，可以通过邮箱联系我：<button class="copy-chip copy-chip-inline" type="button" data-copy="ethan_hzq@163.com" data-copy-label="邮箱">ethan_hzq@163.com</button></p>
           <p>页面通过 GitHub Pages 部署，内容更新后有时需要手动刷新；如果发现页面没有变化，可以尝试清除浏览器缓存。</p>
-          <p>文档由个人维护，可能存在遗漏或过期内容。涉及报到、缴费、政策、学院安排等事项，请以学校和学院官方通知为准。</p>
-          <p>如果你也想一起维护文档，或者有其他问题咨询，可以通过邮箱联系我：<button class="copy-chip copy-chip-inline" type="button" data-copy="ethan_hzq@163.com" data-copy-label="邮箱">复制邮箱：ethan_hzq@163.com</button></p>
         `,
       },
       {
         id: 'updates',
         title: '更新公告',
-        summary: '这里保留原文档的更新记录，方便追踪内容变化。',
+        summary: '',
         html: `
           <ol class="timeline">
-            <li><time>2025-07-25</time><span>增加政策文件超链接。</span></li>
-            <li><time>2025-07-22</time><span>更新校区说明部分，使其阅读更加简洁；修改所有已经不适用的政策。</span></li>
-            <li><time>2024-07-25</time><span>修改数科系校区分布。</span></li>
-            <li><time>2024-07-24</time><span>增加校区说明分布及专业分布、转专业相关内容。</span></li>
-            <li><time>2024-07-20</time><span>增加校园网相关解答。</span></li>
-            <li><time>2024-07-19</time><span>发布。</span></li>
+            <li><time>2026-06-15</time><p>1. 首页调整为：写在最前、更新公告<br>2. 将快速开始拆分为一级页面，并保留阶段时间轴<br>3. 优化一级目录和二级目录的跳转逻辑，进入大类时先展示页面标题和简介<br>4. 优化左侧目录树展开逻辑和缩进样式<br>5. 统一首个二级标题和后续二级标题的顶部留白<br>6. 增加移动端抽屉目录，适配手机阅读<br>7. 修复章节锚点跳转位置偏移问题</p></li>
+            <li><time>2025-06-14</time><p>1. 禁止普通文本复制，邮箱和新生群改为点击复制</p></li>
+            <li><time>2025-06-14</time><p>1. 将原单页 HTML 重构为 Vue3 + Vite 文档站，并引入 Element Plus，统一页面组件与视觉样式<br>2. 改为文档式布局：顶部搜索、左侧目录、正文内容、右侧本文目录</p></li>
+            <li><time>2025-07-25</time><p>1.增加政策文件超链接</p></li>
+            <li><time>2025-07-22</time><p>1. 更新校区说明部分，使其阅读更加简洁<br>2. 修改所有已经不适用的政策</p></li>
+            <li><time>2024-07-25</time><p>1. 修改数科系校区分布</p></li>
+            <li><time>2024-07-24</time><p>1. 增加校区说明分布及专业分布、转专业相关内容</p></li>
+            <li><time>2024-07-20</time><p>1. 增加校园网相关解答</p></li>
+            <li><time>2024-07-19</time><p>1. 发布</p></li>
           </ol>
         `,
       },
+    ],
+  },
+  {
+    path: '/quick-start',
+    name: '快速开始',
+    icon: 'Rocket',
+    eyebrow: '按阶段定位重点',
+    title: '快速开始',
+    description: '按入学前、入学时、入学后三个阶段快速定位重点内容。',
+    direct: true,
+    sections: [
       {
-        id: 'copyright',
-        title: '版权声明',
-        summary: '本文档只用于解答新生疑问，请勿用于营销、引流或商业活动。',
-        html: `
-          <p><strong>本文档仅供解答新生疑问，禁止用于从事营销、引流、倒卖资料等活动。</strong></p>
-          <p>欢迎各位新生加入<strong>中原工学院唯一无广纯为爱发电新生群</strong>。</p>
-          <p><button class="copy-chip copy-chip-inline" type="button" data-copy="781245651" data-copy-label="新生群群号">复制新生群：781245651</button></p>
-          <p>如果你不是从上面这个群而是别的新生群看到这个网页，那么那个群多半是广告群，群主和管理员可能会借新生群卖卡、卖被子或做其他营销。</p>
-          <p class="notice danger">请各位同学警惕抖音、小红书等社交媒体自称学长学姐的非官方人员主动联系你邀请加入个人组织建立的新生群。涉及床上用品、校园电话卡等与金钱有关的交易，请务必慎重。</p>
-        `,
+        id: 'timeline',
+        title: '入学阶段',
+        summary: '先看阶段，再按需要进入对应专题页面。',
+        stages: [
+          {
+            title: '入学前须知',
+            description: '先确认录取、校区、路线和需要提前准备的材料。',
+            items: [
+              { title: '报到与校区', text: '校区分布、预报到、学生票、到校路线、证件清单。', to: '/arrival' },
+              { title: '医保与政策', text: '大学生医保、转专业政策、奖助制度等提前了解。', to: { path: '/affairs', hash: '#medical' } },
+            ],
+          },
+          {
+            title: '入学时明白',
+            description: '到校后最先会遇到住宿、通勤、快递和校园服务。',
+            items: [
+              { title: '住宿与生活', text: '宿舍分配、门禁熄灯、校内通勤、快递驿站。', to: '/life' },
+              { title: '服务与其他', text: '校园网、消费方式、银行卡和活动相关信息。', to: '/services' },
+            ],
+          },
+          {
+            title: '入学后了解',
+            description: '课程开始后，再逐步了解学习安排、训练和后续发展。',
+            items: [
+              { title: '学习与训练', text: '教材、小语种、开学考、早晚自习、军训。', to: '/study' },
+              { title: '奖助与转专业', text: '奖学金、专项奖学金、转专业办理时间和要求。', to: { path: '/affairs', hash: '#scholarship' } },
+            ],
+          },
+        ],
       },
     ],
   },

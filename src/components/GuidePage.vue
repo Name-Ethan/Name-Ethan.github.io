@@ -13,30 +13,25 @@ const props = defineProps({
 
 const route = useRoute()
 
-const displaySections = computed(() => {
-  const sections = props.page.sections ?? []
-
-  if (!props.page.stages) {
-    return sections
-  }
-
-  const stageSection = {
-    id: 'quick-start',
-    title: '快速开始',
-    summary: '按入学前、入学时、入学后三个阶段快速定位重点内容。',
-    stages: props.page.stages,
-  }
-  const prefaceIndex = sections.findIndex((section) => section.id === 'preface')
-  const insertAt = prefaceIndex >= 0 ? prefaceIndex + 1 : 1
-
-  return [
-    ...sections.slice(0, insertAt),
-    stageSection,
-    ...sections.slice(insertAt),
-  ]
-})
+const displaySections = computed(() => props.page.sections ?? [])
 
 const breadcrumbLabel = computed(() => (props.page.home ? '首页' : props.page.name))
+
+function sectionTo(section, index) {
+  if (index === 0 && !props.page.home) {
+    return props.page.path
+  }
+
+  return { path: props.page.path, hash: `#${section.id}` }
+}
+
+function handleOutlineNavigation(index) {
+  if (index === 0 && !props.page.home) {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+  }
+}
 
 function scrollToHash() {
   const rawRouteHash = route.hash ? route.hash.slice(1) : ''
@@ -163,9 +158,10 @@ watch(
         <div class="outline-panel">
           <p>在本文中</p>
           <RouterLink
-            v-for="section in displaySections"
+            v-for="(section, sectionIndex) in displaySections"
             :key="section.id"
-            :to="{ path: props.page.path, hash: `#${section.id}` }"
+            :to="sectionTo(section, sectionIndex)"
+            @click="handleOutlineNavigation(sectionIndex)"
           >
             {{ section.title }}
           </RouterLink>

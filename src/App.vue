@@ -9,6 +9,7 @@ import {
   Home,
   MapPinned,
   Menu,
+  Rocket,
   Search,
   Wifi,
   X,
@@ -27,6 +28,7 @@ const icons = {
   FileText,
   Home,
   MapPinned,
+  Rocket,
   Wifi,
 }
 
@@ -86,6 +88,33 @@ function openMobileNav() {
 
 function closeMobileNav() {
   isMobileNavOpen.value = false
+}
+
+function isDirectPage(page) {
+  return page.path === '/' || page.direct
+}
+
+function sectionTo(page, section, index) {
+  if (index === 0 && !page.home) {
+    return page.path
+  }
+
+  return { path: page.path, hash: `#${section.id}` }
+}
+
+function handleSectionNavigation(page, index) {
+  closeSearch()
+
+  if (index === 0 && !page.home) {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+  }
+}
+
+function handleMobileSectionNavigation(page, index) {
+  handleSectionNavigation(page, index)
+  closeMobileNav()
 }
 
 function isExpanded(path) {
@@ -172,8 +201,8 @@ onBeforeUnmount(() => {
           <img src="/logo.png" alt="中原工学院" />
         </span>
         <span class="brand-copy">
-          <strong>新生生存指北</strong>
-          <small>中原工学院</small>
+          <strong>中原工学院生存指北</strong>
+          <small>非官方不唯一指定新生手册</small>
         </span>
       </RouterLink>
 
@@ -243,7 +272,7 @@ onBeforeUnmount(() => {
       <nav class="doc-tree mobile-doc-tree" aria-label="移动端一级目录">
         <section v-for="page in guidePages" :key="page.path" class="doc-tree-section">
           <RouterLink
-            v-if="page.path === '/'"
+            v-if="isDirectPage(page)"
             class="doc-tree-parent doc-tree-home-link"
             :class="{ 'is-current-page': currentPage.path === page.path }"
             :aria-current="currentPage.path === page.path ? 'page' : undefined"
@@ -270,15 +299,15 @@ onBeforeUnmount(() => {
             <ChevronDown class="doc-tree-chevron" :size="15" stroke-width="2" aria-hidden="true" />
           </button>
 
-          <div v-if="page.path !== '/'" v-show="isExpanded(page.path)" class="doc-tree-children">
+          <div v-if="!isDirectPage(page)" v-show="isExpanded(page.path)" class="doc-tree-children">
             <RouterLink
-              v-for="section in page.sections"
+              v-for="(section, sectionIndex) in page.sections"
               :key="section.id"
-              :to="{ path: page.path, hash: `#${section.id}` }"
+              :to="sectionTo(page, section, sectionIndex)"
               class="doc-tree-child"
               active-class=""
               exact-active-class=""
-              @click="closeMobileNav"
+              @click="handleMobileSectionNavigation(page, sectionIndex)"
             >
               {{ section.title }}
             </RouterLink>
@@ -305,7 +334,7 @@ onBeforeUnmount(() => {
         <nav class="doc-tree" aria-label="一级目录">
           <section v-for="page in guidePages" :key="page.path" class="doc-tree-section">
             <RouterLink
-              v-if="page.path === '/'"
+              v-if="isDirectPage(page)"
               class="doc-tree-parent doc-tree-home-link"
               :class="{ 'is-current-page': currentPage.path === page.path }"
               :aria-current="currentPage.path === page.path ? 'page' : undefined"
@@ -332,14 +361,15 @@ onBeforeUnmount(() => {
               <ChevronDown class="doc-tree-chevron" :size="15" stroke-width="2" aria-hidden="true" />
             </button>
 
-            <div v-if="page.path !== '/'" v-show="isExpanded(page.path)" class="doc-tree-children">
+            <div v-if="!isDirectPage(page)" v-show="isExpanded(page.path)" class="doc-tree-children">
               <RouterLink
-                v-for="section in page.sections"
+                v-for="(section, sectionIndex) in page.sections"
                 :key="section.id"
-                :to="{ path: page.path, hash: `#${section.id}` }"
+                :to="sectionTo(page, section, sectionIndex)"
                 class="doc-tree-child"
                 active-class=""
                 exact-active-class=""
+                @click="handleSectionNavigation(page, sectionIndex)"
               >
                 {{ section.title }}
               </RouterLink>
