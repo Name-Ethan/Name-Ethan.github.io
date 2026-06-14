@@ -7,34 +7,42 @@ export const guidePages = [
     title: '中原工学院新生生存指北',
     description: '把新生最容易反复询问的问题，整理成一份可以快速定位的入学指南。',
     home: true,
-    cards: [
-      { title: '报到与校区', text: '校区分布、预报到、学生票、到校路线、证件清单。', to: '/arrival' },
-      { title: '住宿与生活', text: '宿舍分配、门禁熄灯、校内通勤、快递驿站。', to: '/life' },
-      { title: '学习与训练', text: '教材、小语种、开学考、早晚自习、军训。', to: '/study' },
-      { title: '校园事务', text: '医保、奖助、转专业等需要提前了解的规则。', to: '/affairs' },
-      { title: '服务与其他', text: '校园网、活动、消费方式、银行卡。', to: '/services' },
+    stages: [
+      {
+        title: '入学前须知',
+        description: '先确认录取、校区、路线和需要提前准备的材料。',
+        items: [
+          { title: '报到与校区', text: '校区分布、预报到、学生票、到校路线、证件清单。', to: '/arrival' },
+          { title: '医保与政策', text: '大学生医保、转专业政策、奖助制度等提前了解。', to: { path: '/affairs', hash: '#medical' } },
+        ],
+      },
+      {
+        title: '入学时明白',
+        description: '到校后最先会遇到住宿、通勤、快递和校园服务。',
+        items: [
+          { title: '住宿与生活', text: '宿舍分配、门禁熄灯、校内通勤、快递驿站。', to: '/life' },
+          { title: '服务与其他', text: '校园网、消费方式、银行卡和活动相关信息。', to: '/services' },
+        ],
+      },
+      {
+        title: '入学后了解',
+        description: '课程开始后，再逐步了解学习安排、训练和后续发展。',
+        items: [
+          { title: '学习与训练', text: '教材、小语种、开学考、早晚自习、军训。', to: '/study' },
+          { title: '奖助与转专业', text: '奖学金、专项奖学金、转专业办理时间和要求。', to: { path: '/affairs', hash: '#scholarship' } },
+        ],
+      },
     ],
     sections: [
       {
-        id: 'copyright',
-        title: '版权声明',
-        summary: '本文档只用于解答新生疑问，请勿用于营销、引流或商业活动。',
-        html: `
-          <p><strong>本文档仅供解答新生疑问，禁止用于从事营销等活动。</strong></p>
-          <p>欢迎各位新生加入<strong>中原工学院唯一无广纯为爱发电新生群</strong>。</p>
-          <p><mark>中原工学院吧2026级新生群：781245651</mark></p>
-          <p>如果你不是从上面这个群而是别的新生群看到这个网页，那么那个群多半是广告群，群主和管理员可能会借新生群卖卡、卖被子或做其他营销。</p>
-          <p class="notice danger">请各位同学警惕抖音、小红书等社交媒体自称学长学姐的非官方人员主动联系你邀请加入个人组织建立的新生群。涉及床上用品、校园电话卡等与金钱有关的交易，请务必慎重。</p>
-        `,
-      },
-      {
         id: 'preface',
         title: '写在最前',
-        summary: '页面通过 GitHub Pages 部署，内容更新后偶尔需要刷新浏览器缓存。',
+        summary: '这是一份面向中原工学院新生的非官方入学指南，用来快速定位常见问题。',
         html: `
-          <p>页面通过 GitHub Pages 部署，所以有些时候内容更新完需要手动刷新一下。如果发现页面没有变化，可以尝试清除浏览器缓存数据。</p>
-          <p>群内无广，大家为爱发电，欢迎各位新生入群讨论交流。</p>
-          <p>如果你也想一起维护文档，或者有其他问题咨询，可以通过邮箱联系我：<a href="mailto:ethan_hzq@163.com">ethan_hzq@163.com</a></p>
+          <p>这份指南主要整理新生入学前后最容易反复询问的问题，方便大家按阶段快速查找。</p>
+          <p>页面通过 GitHub Pages 部署，内容更新后有时需要手动刷新；如果发现页面没有变化，可以尝试清除浏览器缓存。</p>
+          <p>文档由个人维护，可能存在遗漏或过期内容。涉及报到、缴费、政策、学院安排等事项，请以学校和学院官方通知为准。</p>
+          <p>如果你也想一起维护文档，或者有其他问题咨询，可以通过邮箱联系我：<button class="copy-chip copy-chip-inline" type="button" data-copy="ethan_hzq@163.com" data-copy-label="邮箱">复制邮箱：ethan_hzq@163.com</button></p>
         `,
       },
       {
@@ -50,6 +58,18 @@ export const guidePages = [
             <li><time>2024-07-20</time><span>增加校园网相关解答。</span></li>
             <li><time>2024-07-19</time><span>发布。</span></li>
           </ol>
+        `,
+      },
+      {
+        id: 'copyright',
+        title: '版权声明',
+        summary: '本文档只用于解答新生疑问，请勿用于营销、引流或商业活动。',
+        html: `
+          <p><strong>本文档仅供解答新生疑问，禁止用于从事营销、引流、倒卖资料等活动。</strong></p>
+          <p>欢迎各位新生加入<strong>中原工学院唯一无广纯为爱发电新生群</strong>。</p>
+          <p><button class="copy-chip copy-chip-inline" type="button" data-copy="781245651" data-copy-label="新生群群号">复制新生群：781245651</button></p>
+          <p>如果你不是从上面这个群而是别的新生群看到这个网页，那么那个群多半是广告群，群主和管理员可能会借新生群卖卡、卖被子或做其他营销。</p>
+          <p class="notice danger">请各位同学警惕抖音、小红书等社交媒体自称学长学姐的非官方人员主动联系你邀请加入个人组织建立的新生群。涉及床上用品、校园电话卡等与金钱有关的交易，请务必慎重。</p>
         `,
       },
     ],
