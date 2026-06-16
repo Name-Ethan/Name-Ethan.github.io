@@ -14,6 +14,7 @@ import {
   Wifi,
   X,
 } from 'lucide-vue-next'
+import { activeSectionId } from './composables/useScrollSpy'
 import { guidePages } from './data/guide'
 import { copyText } from './utils/clipboard'
 
@@ -304,7 +305,7 @@ onBeforeUnmount(() => {
               v-for="(section, sectionIndex) in page.sections"
               :key="section.id"
               :to="sectionTo(page, section, sectionIndex)"
-              class="doc-tree-child"
+              :class="['doc-tree-child', { 'is-active-section': activeSectionId === section.id }]"
               active-class=""
               exact-active-class=""
               @click="handleMobileSectionNavigation(page, sectionIndex)"
@@ -366,7 +367,7 @@ onBeforeUnmount(() => {
                 v-for="(section, sectionIndex) in page.sections"
                 :key="section.id"
                 :to="sectionTo(page, section, sectionIndex)"
-                class="doc-tree-child"
+                :class="['doc-tree-child', { 'is-active-section': activeSectionId === section.id }]"
                 active-class=""
                 exact-active-class=""
                 @click="handleSectionNavigation(page, sectionIndex)"

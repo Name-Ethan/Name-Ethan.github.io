@@ -460,6 +460,12 @@ a {
   background: var(--surface-soft);
 }
 
+.doc-tree-child.is-active-section {
+  color: var(--brand-dark);
+  font-weight: 700;
+  background: var(--brand-soft);
+}
+
 .sidebar-footer {
   display: grid;
   gap: 8px;
@@ -891,9 +897,13 @@ h1 {
   line-height: 1.45;
 }
 
-.outline-panel a:hover,
-.outline-panel a.router-link-active {
+.outline-panel a:hover {
   color: var(--brand-dark);
+}
+
+.outline-panel a.is-active-section {
+  color: var(--brand-dark);
+  font-weight: 700;
 }
 
 @media (max-width: 1180px) {

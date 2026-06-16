@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import heroImage from '../assets/campus-hero.png'
 import { copyText } from '../utils/clipboard'
+import { activeSectionId, useScrollSpy } from '../composables/useScrollSpy'
 
 const props = defineProps({
   page: {
@@ -14,6 +15,10 @@ const props = defineProps({
 const route = useRoute()
 
 const displaySections = computed(() => props.page.sections ?? [])
+
+const sectionIds = computed(() => displaySections.value.map((s) => s.id))
+
+useScrollSpy(sectionIds)
 
 const breadcrumbLabel = computed(() => (props.page.home ? '首页' : props.page.name))
 
@@ -161,6 +166,7 @@ watch(
             v-for="(section, sectionIndex) in displaySections"
             :key="section.id"
             :to="sectionTo(section, sectionIndex)"
+            :class="{ 'is-active-section': activeSectionId === section.id }"
             @click="handleOutlineNavigation(sectionIndex)"
           >
             {{ section.title }}
