@@ -1,7 +1,7 @@
 <script setup>
 import { computed, nextTick, onMounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import heroImage from '../assets/campus-hero.png'
+import heroImage from '../assets/campus-hero.webp'
 import { copyText } from '../utils/clipboard'
 import { activeSectionId, useScrollSpy } from '../composables/useScrollSpy'
 
