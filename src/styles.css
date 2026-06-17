@@ -238,7 +238,7 @@ a {
   display: flex;
   flex-direction: column;
   width: min(86vw, 340px);
-  padding: 16px 14px;
+  padding: 16px 14px calc(14px + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   visibility: hidden;
   background: #fff;
@@ -986,7 +986,7 @@ h1 {
   }
 
   .content {
-    padding: 18px 16px 56px;
+    padding: 18px 16px calc(56px + env(safe-area-inset-bottom, 0px));
   }
 
   .docs-page-grid {
@@ -1089,7 +1089,7 @@ h1 {
   }
 
   .content {
-    padding: 16px 14px 52px;
+    padding: 16px 14px calc(52px + env(safe-area-inset-bottom, 0px));
   }
 
   .hero-section::after {
