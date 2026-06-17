@@ -23,6 +23,15 @@ const query = ref('')
 const expandedPaths = ref(new Set())
 const isMobileNavOpen = ref(false)
 
+// Swipe gesture state
+const swipeEdgeWidth = 60
+const swipeThreshold = 80
+let touchStartX = 0
+let touchStartY = 0
+let touchLastX = 0
+let touchActive = false
+let touchIsSwipe = false
+
 const icons = {
   BedDouble,
   BookOpen,
@@ -174,6 +183,51 @@ function handleKeydown(event) {
   }
 }
 
+function handleTouchStart(event) {
+  if (isMobileNavOpen.value) return
+  if (isNativeEditable(event.target)) return
+
+  const touch = event.touches[0]
+  if (touch.clientX > swipeEdgeWidth) return
+
+  touchStartX = touch.clientX
+  touchStartY = touch.clientY
+  touchLastX = touch.clientX
+  touchActive = true
+  touchIsSwipe = false
+}
+
+function handleTouchMove(event) {
+  if (!touchActive) return
+
+  const touch = event.touches[0]
+  const deltaX = touch.clientX - touchStartX
+  const deltaY = touch.clientY - touchStartY
+
+  touchLastX = touch.clientX
+
+  // Confirm horizontal right-swipe once horizontal movement dominates
+  if (!touchIsSwipe && Math.abs(deltaX) > Math.abs(deltaY) && deltaX > 10) {
+    touchIsSwipe = true
+  }
+
+  // Only block scroll when swipe is confirmed
+  if (touchIsSwipe) {
+    event.preventDefault()
+  }
+}
+
+function handleTouchEnd() {
+  if (!touchActive) return
+
+  if (touchIsSwipe && touchLastX - touchStartX >= swipeThreshold) {
+    openMobileNav()
+  }
+
+  touchActive = false
+  touchIsSwipe = false
+}
+
 onMounted(() => {
   document.addEventListener('copy', blockCopyLikeInteraction)
   document.addEventListener('cut', blockCopyLikeInteraction)
@@ -181,6 +235,9 @@ onMounted(() => {
   document.addEventListener('dragstart', blockCopyLikeInteraction)
   document.addEventListener('selectstart', blockCopyLikeInteraction)
   document.addEventListener('keydown', handleKeydown)
+  document.addEventListener('touchstart', handleTouchStart, { passive: true })
+  document.addEventListener('touchmove', handleTouchMove, { passive: false })
+  document.addEventListener('touchend', handleTouchEnd, { passive: true })
 })
 
 onBeforeUnmount(() => {
@@ -190,6 +247,9 @@ onBeforeUnmount(() => {
   document.removeEventListener('dragstart', blockCopyLikeInteraction)
   document.removeEventListener('selectstart', blockCopyLikeInteraction)
   document.removeEventListener('keydown', handleKeydown)
+  document.removeEventListener('touchstart', handleTouchStart)
+  document.removeEventListener('touchmove', handleTouchMove)
+  document.removeEventListener('touchend', handleTouchEnd)
   document.body.classList.remove('is-mobile-nav-open')
 })
 </script>
