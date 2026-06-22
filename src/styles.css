@@ -233,18 +233,18 @@ a {
   position: fixed;
   top: 0;
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 60;
   display: flex;
   flex-direction: column;
   width: min(86vw, 340px);
-  padding: 16px 14px;
+  padding: 16px 14px calc(14px + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   visibility: hidden;
   background: #fff;
   border-right: 1px solid var(--line);
-  box-shadow: 18px 0 42px rgba(31, 35, 40, 0.16);
-  transform: translateX(-100%);
+  box-shadow: -18px 0 42px rgba(31, 35, 40, 0.16);
+  transform: translateX(100%);
   transition:
     transform 180ms ease,
     visibility 180ms ease;
@@ -289,8 +289,8 @@ a {
 
 .mobile-drawer-close {
   display: inline-flex;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
 }
 
 .mobile-drawer-close:hover,
@@ -319,7 +319,7 @@ a {
 }
 
 .mobile-doc-tree .doc-tree-child {
-  min-height: 36px;
+  min-height: 44px;
   font-size: 15px;
 }
 
@@ -460,6 +460,12 @@ a {
   background: var(--surface-soft);
 }
 
+.doc-tree-child.is-active-section {
+  color: var(--brand-dark);
+  font-weight: 700;
+  background: var(--brand-soft);
+}
+
 .sidebar-footer {
   display: grid;
   gap: 8px;
@@ -476,8 +482,8 @@ a {
   align-items: center;
   justify-content: center;
   width: fit-content;
-  min-height: 30px;
-  padding: 5px 11px;
+  min-height: 44px;
+  padding: 10px 16px;
   color: var(--brand-dark);
   font-weight: 700;
   font-size: 13px;
@@ -891,9 +897,13 @@ h1 {
   line-height: 1.45;
 }
 
-.outline-panel a:hover,
-.outline-panel a.router-link-active {
+.outline-panel a:hover {
   color: var(--brand-dark);
+}
+
+.outline-panel a.is-active-section {
+  color: var(--brand-dark);
+  font-weight: 700;
 }
 
 @media (max-width: 1180px) {
@@ -948,7 +958,7 @@ h1 {
     display: inline-flex;
     gap: 6px;
     min-width: 76px;
-    min-height: 38px;
+    min-height: 44px;
     padding: 0 10px;
     font-weight: 800;
   }
@@ -967,7 +977,7 @@ h1 {
 
   .doc-tree-parent {
     grid-template-columns: var(--tree-icon-size) auto 16px;
-    min-height: 38px;
+    min-height: 44px;
     padding: 0 var(--tree-parent-padding-x);
   }
 
@@ -976,7 +986,7 @@ h1 {
   }
 
   .content {
-    padding: 18px 16px 56px;
+    padding: 18px 16px calc(56px + env(safe-area-inset-bottom, 0px));
   }
 
   .docs-page-grid {
@@ -1079,7 +1089,7 @@ h1 {
   }
 
   .content {
-    padding: 16px 14px 52px;
+    padding: 16px 14px calc(52px + env(safe-area-inset-bottom, 0px));
   }
 
   .hero-section::after {
