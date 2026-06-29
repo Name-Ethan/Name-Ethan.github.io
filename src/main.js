@@ -8,6 +8,7 @@ import 'element-plus/es/components/input/style/css'
 import 'element-plus/es/components/message/style/css'
 import 'element-plus/es/components/tag/style/css'
 import App from './App.vue'
+import CopyText from './components/CopyText.vue'
 import { router } from './router'
 import './styles.css'
 
@@ -18,4 +19,5 @@ createApp(App)
   .component('ElCard', ElCard)
   .component('ElInput', ElInput)
   .component('ElTag', ElTag)
+  .component('CopyText', CopyText)
   .mount('#app')
