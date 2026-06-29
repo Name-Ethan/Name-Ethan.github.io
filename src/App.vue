@@ -15,8 +15,8 @@ import {
   X,
 } from 'lucide-vue-next'
 import { activeSectionId } from './composables/useScrollSpy'
+import CopyText from './components/CopyText.vue'
 import { guidePages } from './data/guide'
-import { copyText } from './utils/clipboard'
 
 const route = useRoute()
 const query = ref('')
@@ -317,12 +317,12 @@ onBeforeUnmount(() => {
       </nav>
 
       <footer class="mobile-drawer-footer">
-        <button type="button" class="copy-chip" @click="copyText('781245651', '新生群群号')">
+        <CopyText value="781245651" label="新生群群号" :inline="false">
           新生群：781245651
-        </button>
-        <button type="button" class="copy-chip" @click="copyText('ethan_hzq@163.com', '邮箱')">
+        </CopyText>
+        <CopyText value="ethan_hzq@163.com" label="邮箱" :inline="false">
           邮箱：ethan_hzq@163.com
-        </button>
+        </CopyText>
       </footer>
     </aside>
 
@@ -379,12 +379,12 @@ onBeforeUnmount(() => {
         </nav>
 
         <footer class="sidebar-footer">
-          <button type="button" class="copy-chip" @click="copyText('781245651', '新生群群号')">
+          <CopyText value="781245651" label="新生群群号" :inline="false">
             新生群：781245651
-          </button>
-          <button type="button" class="copy-chip" @click="copyText('ethan_hzq@163.com', '邮箱')">
+          </CopyText>
+          <CopyText value="ethan_hzq@163.com" label="邮箱" :inline="false">
             邮箱：ethan_hzq@163.com
-          </button>
+          </CopyText>
         </footer>
       </aside>
 

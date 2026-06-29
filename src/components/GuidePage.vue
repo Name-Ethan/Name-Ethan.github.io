@@ -2,7 +2,7 @@
 import { computed, nextTick, onMounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import heroImage from '../assets/campus-hero.webp'
-import { copyText } from '../utils/clipboard'
+import UpdateTimeline from './UpdateTimeline.vue'
 import { activeSectionId, useScrollSpy } from '../composables/useScrollSpy'
 
 const props = defineProps({
@@ -71,21 +71,6 @@ function scrollToHash() {
   })
 }
 
-function handleArticleClick(event) {
-  const trigger = event.target instanceof Element ? event.target.closest('[data-copy]') : null
-
-  if (!trigger) {
-    return
-  }
-
-  const value = trigger.getAttribute('data-copy')
-  const label = trigger.getAttribute('data-copy-label') || '内容'
-
-  if (value) {
-    copyText(value, label)
-  }
-}
-
 onMounted(() => {
   nextTick(scrollToHash)
 })
@@ -124,7 +109,7 @@ watch(
           <p>{{ props.page.description }}</p>
         </section>
 
-        <div class="article-stack" @click="handleArticleClick">
+        <div class="article-stack">
           <section
             v-for="section in displaySections"
             :key="section.id"
@@ -154,7 +139,12 @@ watch(
                 </div>
               </div>
             </div>
-            <div v-else class="prose" v-html="section.html"></div>
+            <div v-else-if="section.updates" class="prose">
+              <UpdateTimeline />
+            </div>
+            <div v-else-if="section.component" class="prose">
+              <component :is="section.component" />
+            </div>
           </section>
         </div>
       </div>
